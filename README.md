@@ -14,7 +14,7 @@ Provision Raspberry Pi to Display Dashboard
 **Install Raspbian OS**
 
 * Format your SD using Disk Utility ~ Format MS-DOS (FAT)
-* Download [Raspbian Jessie with Pixel](https://downloads.raspberrypi.org/raspbian_latest)
+* Download [Raspberry Pi OS](https://www.raspberrypi.org/downloads/raspberry-pi-os/)
 * Unzip the download
 * Burn the image to your SD Card Using [Etcher](https://etcher.io/)
 * Insert your SD and turn on your Pi.
@@ -59,7 +59,7 @@ Update variables in `vars/secrets.yml`:
 - `user_password`
 - `pi_password`
 
-Encyrpt `vars/secrets.yml` using [Ansible Vault](##Ansible Vault)  
+Encyrpt `vars/secrets.yml` using [Ansible Vault](## Ansible Vault)  
 `ansible-vault edit vars/secrets.yml`
 
 Deploy using [Ansible](http://www.ansible.com).
@@ -117,7 +117,7 @@ Let Ansible do it's Magic :)
     - Waits for SSH to come up
 
 
-##Ansible Vault
+## Ansible Vault
 
 To use `ansible-vault` you must have the file `~/.vault_pass.txt` on your machine with the vault password inside. The password is stored in 1Password Vault.
 
