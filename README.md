@@ -6,7 +6,7 @@ Provision Raspberry Pi to Display Dashboard
 
 * [Ansible](http://www.ansible.com/)
 * [Ansible Vault](https://docs.ansible.com/ansible/latest/user_guide/vault.html)
-* [Raspbian Jessie OS](https://www.raspberrypi.org/downloads/raspbian/)
+* [Raspberry Pi OS](https://www.raspberrypi.org/downloads/raspberry-pi-os/)
 
 
 ## Setup Raspberry PI
