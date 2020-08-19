@@ -54,6 +54,14 @@ Update variables in `vars/all.yml`:
 * `host_ip`
 * `ssh_pub_key`
 
+Update variables in `vars/secrets.yml`:
+
+- `user_password`
+- `pi_password`
+
+Encyrpt `vars/secrets.yml` using [Ansible Vault](##Ansible Vault)  
+`ansible-vault edit vars/secrets.yml`
+
 Deploy using [Ansible](http://www.ansible.com).
 
 ```
@@ -109,13 +117,20 @@ Let Ansible do it's Magic :)
     - Waits for SSH to come up
 
 
-## Ansible Vault
+##Ansible Vault
 
 To use `ansible-vault` you must have the file `~/.vault_pass.txt` on your machine with the vault password inside. The password is stored in 1Password Vault.
 
 `user_password` and `pi_password` are stored in `vars/secrets.yml`.
 
-To edit or view them run:  ``` ansible-vault edit vars/secrets.yml```
+Encrypt:  
+` ansible-vault edit vars/secrets.yml`
+
+Decrypt:  
+`ansible-vault decrypt vars/secrets.yml`
+
+Edit or View:  
+`ansible-vault edit vars/secrets.yml`
 
 ## Using Playbook after Initial Setup
 
