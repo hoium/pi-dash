@@ -5,5 +5,5 @@
   hosts: pi-dash
   roles:
     - pi
-  remote_user: pi #Change or remove after initial setup
+  remote_user: hoium #Change {{ user_name }} after initial setup
   become: yes

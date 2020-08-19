@@ -46,7 +46,7 @@ Setup the ansible script.
 cd ansible-pi
 ```
 
-Edit the `hosts` file by replacing `pi-ip` with your IP.
+Edit the `hosts` file by replacing `host-ip` with your IP.
 
 Update variables in `vars/all.yml`:
 

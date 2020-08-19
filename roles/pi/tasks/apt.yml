@@ -13,8 +13,8 @@
   when: apt_remove_packages
 
 - name: APT - Full system update
-  apt: upgrade=full
-# ignore_errors: true
+  apt:
+    upgrade: full
   tags:
     - full-update
 
@@ -27,12 +27,6 @@
   tags:
     - full-update
 
-- name: Waiting for reboot...
-  local_action:
-    wait_for
-      host={{ ansible_host }}
-      state=started
-      delay=30
-  when: restarted.changed
-  tags:
-    - full-update
+- name: Wait for SSH to come up {{ host_ip }}
+  wait_for_connection:
+      timeout: 300
