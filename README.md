@@ -118,7 +118,7 @@ Let Ansible do it's Magic :)
     - Waits for SSH to come up
 
 
-#Ansible-Vault
+## Ansible-Vault
 
 To use `ansible-vault` you must have the file `~/.vault_pass.txt` on your machine with the vault password inside. The password is stored in 1Password Vault.
 
