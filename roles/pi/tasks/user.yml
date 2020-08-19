@@ -1,0 +1,65 @@
+---
+
+- name: Ensure User is present
+  user:
+    name: "{{ user_name }}"
+    groups: "{{ user_groups }}"
+    generate_ssh_key: yes
+    ssh_key_bits: 4096
+    shell: "/bin/bash"
+    state: present
+  register: new_user
+
+- name: Upload SSH key
+  authorized_key:
+    user: "{{ user_name }}"
+    key: "{{ lookup('file', '{{ ssh_pub_key }}') }}"
+
+- name: Enable passwordless sudo
+  lineinfile:
+    dest: /etc/sudoers
+    state: present
+    regexp: "^{{ user_name }}\t"
+    line: "{{ user_name }}\tALL=(ALL:ALL) NOPASSWD:ALL"
+    validate: 'visudo -cf %s'
+
+- name: Set User password
+  shell: "usermod -p $(echo '{{ user_password }}' | openssl passwd -1 -stdin) {{ user_name }}"
+  when: new_user.changed
+
+- name: Change Pi's password
+  shell: "usermod -p $(echo '{{ pi_password }}' | openssl passwd -1 -stdin) pi"
+  when: new_user.changed
+
+- name: Change ssh to new user password
+  set_fact:
+    ansible_password: "{{ pi_password }}"
+  when: new_user.changed
+
+- name: Change Autologin to User
+  lineinfile: dest=/etc/lightdm/lightdm.conf
+              state=present
+              regexp="autologin-user=pi"
+              backrefs=yes
+              line="autologin-user={{ user_name }}"
+  become: True
+  when: new_user.changed
+
+- name: restart server
+  shell: sleep 2 && shutdown -r now
+  async: 1
+  poll: 0
+  become: yes
+  become_method: sudo
+  ignore_errors: true
+
+- name: Wait for SSH to come up {{ ansible_ssh_host }}
+  local_action:
+    wait_for
+      port=22
+      host={{ host_ip }}
+      search_regex=OpenSSH
+      delay=30
+      timeout=300
+      connect_timeout=15
+  sudo: false

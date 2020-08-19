@@ -1,0 +1,35 @@
+---
+
+- name: Generate locale
+  locale_gen: name=en_US.UTF-8 state=present
+
+- name: Update Timezone to America/New_York
+  copy:
+    content="America/New_York\n"
+    dest=/etc/timezone
+    owner=root
+    group=root
+    mode=0644
+    backup=yes
+  notify:
+    - update timezone
+
+- name: Set hostname
+  hostname: name={{ host_name }}
+  when: host_name != None
+
+- name: Modify Hosts File
+  lineinfile:
+    dest: /etc/hosts
+    line: "127.0.0.1    {{ host_name }}"
+    owner: pi
+    group: sudo
+    mode: 0644
+
+- name: Disable Screen Sleep
+  lineinfile: dest=/etc/lightdm/lightdm.conf
+              state=present
+              regexp="#xserver-command=X"
+              backrefs=yes
+              line="xserver-command=X -s 0 dpms"
+  become: True

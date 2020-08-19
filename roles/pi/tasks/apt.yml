@@ -1,0 +1,38 @@
+---
+
+- name: APT - Install packages
+  apt:
+    state: latest
+    name: "{{ apt_install_packages }}"
+  when: apt_install_packages
+
+- name: APT - Remove packages
+  apt:
+    state: absent
+    name: "{{ apt_remove_packages }}"
+  when: apt_remove_packages
+
+- name: APT - Full system update
+  apt: upgrade=full
+# ignore_errors: true
+  tags:
+    - full-update
+
+- name: Rebooting if needed...
+  command: shutdown -r now removes=/var/run/reboot-required
+  async: 0
+  poll: 0
+  ignore_errors: true
+  register: restarted
+  tags:
+    - full-update
+
+- name: Waiting for reboot...
+  local_action:
+    wait_for
+      host={{ ansible_host }}
+      state=started
+      delay=30
+  when: restarted.changed
+  tags:
+    - full-update
