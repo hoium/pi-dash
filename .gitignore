@@ -1,0 +1,11 @@
+.DS_Store
+
+*.py[c|o]
+*.retry
+*.swp
+ansible.log
+src/
+ssh_config_sandbox
+.idea/
+.vscode/
+ssh/config
