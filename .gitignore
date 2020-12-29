@@ -4,8 +4,3 @@
 *.retry
 *.swp
 ansible.log
-src/
-ssh_config_sandbox
-.idea/
-.vscode/
-ssh/config
