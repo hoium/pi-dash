@@ -124,7 +124,7 @@ Let Ansible do it's Magic :)
 
 ## Ansible Vault
 
-To use `ansible-vault` you must have the file `~/.vault_pass.txt` on your machine with the vault password inside. The password is stored in 1Password Vault.
+To use `ansible-vault` you must have the file `./.vault_pass.txt` on your machine with the vault password inside. Do not upload it to Git!!
 
 `user_password` and `pi_password` are stored in `vars/secrets.yml`.
 
