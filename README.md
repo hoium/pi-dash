@@ -10,7 +10,7 @@ Provision Raspberry Pi to Display a Dashboard
 
 ## Setup Raspberry PI
 
-**Install Raspbian OS**
+### Install Raspbian OS
 
 - Format your SD using Disk Utility ~ Format MS-DOS (FAT)
 - Download [Raspbian Buster](https://downloads.raspberrypi.org/raspbian_latest)
@@ -18,7 +18,7 @@ Provision Raspberry Pi to Display a Dashboard
 - Burn the image to your SD Card Using [Etcher](https://etcher.io/)
 - Insert your SD and turn on your Pi.
 
-**Enable SSH Access**
+### Enable SSH Access
 
 - Open your Terminal
 - Run `sudo raspi-config`
@@ -30,7 +30,7 @@ Provision Raspberry Pi to Display a Dashboard
 - Select Yes and Press Enter
 - Reboot your Pi
 
-**Retrieve Pi's IP Address**
+### Retrieve Pi's IP Address
 
 - Connect your Pi to the network through ethernet or WIFI.
 - Open your Terminal
