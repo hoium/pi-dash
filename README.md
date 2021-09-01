@@ -1,6 +1,6 @@
 # pi-dash
 
-Provision Raspberry Pi to Display a Dashboard
+> Provision Raspberry Pi to Display a Web Dashboard
 
 ## Requirements
 
