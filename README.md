@@ -42,7 +42,7 @@
 Setup the ansible script.
 
 ```sh
-cd ansible-pi
+cd pi-dash
 ```
 
 Edit the `hosts` file by replacing `host-ip` with your IP.
