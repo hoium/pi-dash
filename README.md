@@ -22,10 +22,10 @@
 
 - Open your Terminal
 - Run `sudo raspi-config`
-- Select `5 Interfacing Options`
+- Select `3 Interfacing Options`
 - Select `P2 SSH`
 - Select Yes and Press Enter
-- Select `5 Interfacing Options`
+- Select 35 Interfacing Options`
 - Select `P3 VNC`
 - Select Yes and Press Enter
 - Reboot your Pi
