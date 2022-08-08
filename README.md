@@ -87,23 +87,14 @@ Let Ansible do it's Magic :)
    - Removes Root SSH Configuration
    - Updates `sshd_config` Parameters
 
-3. VNC
-
-   - Enables VNC Server
-   - Enables VNC Command
-   - Enables VNC Port
-   - Enables VNC Server Width
-   - Enables VNC Server Height
-   - Enables VNC Server Depth
-
-4. APT
+3. APT
 
    - Installs Packages \* `apt_install_packages`
    - Removes Packages \* `apt_remove_packages`
    - APT Full System Update
    - Reboot if required
 
-5. User
+4. User
 
    - Creates a new user - `user_name`
    - Adds user to groups - `user_groups`
@@ -117,7 +108,7 @@ Let Ansible do it's Magic :)
    - Restarts Pi
    - Waits for SSH to come up
 
-6. Chromium
+5. Chromium
    - Launches Chromium on Boot - Full Screen, Incognito, Geckoboard URL
    - Restarts Pi
    - Waits for SSH to come up
