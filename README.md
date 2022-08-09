@@ -13,7 +13,7 @@
 ### Install Raspbian OS
 
 - Format your SD using Disk Utility ~ Format MS-DOS (FAT)
-- Download [Raspbian Buster](https://downloads.raspberrypi.org/raspbian_latest)
+- Download [Raspbian](https://downloads.raspberrypi.org/raspbian_latest)
 - Unzip the download
 - Burn the image to your SD Card Using [Etcher](https://etcher.io/)
 - Insert your SD and turn on your Pi.
