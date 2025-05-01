@@ -15,7 +15,7 @@
 - Format your SD using Disk Utility ~ Format MS-DOS (FAT)
 - Download [Raspbian](https://downloads.raspberrypi.org/raspbian_latest)
 - Unzip the download
-- Burn the image to your SD Card Using [Etcher](https://etcher.io/)
+- Burn the image to your SD Card
 - Insert your SD and turn on your Pi.
 
 ### Enable SSH Access
@@ -119,13 +119,13 @@ To use `ansible-vault` you must have the file `./.vault_pass.txt` on your machin
 
 `user_password` and `pi_password` are stored in `vars/secrets.yml`.
 
-Encrypt:  
+Encrypt:
 `ansible-vault edit vars/secrets.yml`
 
-Decrypt:  
+Decrypt:
 `ansible-vault decrypt vars/secrets.yml`
 
-Edit or View:  
+Edit or View:
 `ansible-vault edit vars/secrets.yml`
 
 ## Using Playbook after Initial Setup
