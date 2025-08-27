@@ -5,5 +5,5 @@
 *.swp
 ansible.log
 
-.vault_pass.txt
+.vault_pass
 .ansible/
