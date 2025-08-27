@@ -1,14 +1,13 @@
 ---
-
 # Set Hostname
 host_name: $host name # Example ops-pi-cin
 host_ip: $host_ip # Ex 192.168.1.1
 
-#New User
+# New User Information
 user_name: $user # Ex username
 user_groups: sudo,pi,adm,dialout,cdrom,audio,video,plugdev,games,users,input,netdev,spi,i2c,gpio
 
-# Public key to upload to the new user
+# SSHPublic key to upload to the new user
 ssh_pub_key: ~/.ssh/id_rsa.pub
 
 # Dashboard URL

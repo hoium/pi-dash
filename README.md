@@ -1,6 +1,6 @@
 # pi-dash
 
-> Provision Raspberry Pi to Display a Web Dashboard
+> Provision a [Raspberry Pi](https://www.raspberrypi.com/) to Display a Dashboard
 
 ## Requirements
 
@@ -12,10 +12,13 @@
 
 ### Install Raspbian OS
 
-- Format your SD using Disk Utility ~ Format MS-DOS (FAT)
-- Download [Raspbian](https://downloads.raspberrypi.org/raspbian_latest)
+- Format your SD Card using Disk Utility
+  - Format MS-DOS (FAT)
+- Download [Raspbian OS](https://www.raspberrypi.com/software/operating-systems/)
+  - [Latest Verison](https://downloads.raspberrypi.org/raspbian_latest)
 - Unzip the download
-- Burn the image to your SD Card using [Raspberry Pi Imager](https://downloads.raspberrypi.org/imager/imager_latest.dmg)
+- Burn the image to your SD Card using [Raspberry Pi Imager](https://www.raspberrypi.com/software/)
+  - [Direct Download](https://downloads.raspberrypi.org/imager/imager_latest.dmg)
 - Insert your SD and turn on your Pi.
 
 ### Enable SSH Access
@@ -39,7 +42,7 @@
 
 ## Installation
 
-Setup the ansible script.
+Setup Ansible Script.
 
 ```sh
 cd pi-dash
@@ -75,31 +78,27 @@ Let Ansible do it's Magic :)
 ## What does this playbook do?
 
 1. Config
-
    - Generate locale and set it to en_US.UTF-8
    - Update Timezone to America/New York
-   - Set hostname to the defined value - `host_name`
+   - Set hostname to the defined value `host_name`
    - Add `127.0.0.1 host_name` to hosts file
    - Disables Screen Sleep
 
 2. SSH
-
    - Removes Root SSH Configuration
    - Updates `sshd_config` Parameters
 
 3. APT
-
+   - APT Full System Update
    - Installs Packages \* `apt_install_packages`
    - Removes Packages \* `apt_remove_packages`
-   - APT Full System Update
-   - Reboot if required
+   - System Restart if required
 
 4. User
-
    - Creates a new user - `user_name`
    - Adds user to groups - `user_groups`
    - Uploads `ssh_pub_key` to authorized_keys
-   - If your key is not located in `~/.ssh/id_rsa.pub` update `ssh_pub_key`
+     - If your key is not located in `~/.ssh/id_rsa.pub` update `ssh_pub_key`
    - Enables password less sudo
    - Sets `user_name` password to `user_password`
    - Changes Pi's password to - `pi_password`
@@ -109,13 +108,13 @@ Let Ansible do it's Magic :)
    - Waits for SSH to come up
 
 5. Chromium
-   - Launches Chromium on Boot - Full Screen, Incognito, Geckoboard URL
+   - Configures Chromium to launch on start, full screen, incognito, `dashboard_url`.
    - Restarts Pi
    - Waits for SSH to come up
 
 ## Ansible Vault
 
-To use `ansible-vault` you must have the file `./.vault_pass` on your machine with the vault password inside. Do not upload it to Git!!
+To use `ansible-vault` you must have the file `.vault_pass` on your machine with the vault password inside. Do not upload it to Git!!
 
 `user_password` and `pi_password` are stored in `vars/secrets.yml`.
 
@@ -128,7 +127,7 @@ Decrypt:
 Edit or View:
 `ansible-vault edit vars/secrets.yml`
 
-## Using Playbook after Initial Setup
+## Using the Playbook after the Initial Setup
 
 Add Pi to `~/.ssh/config`
 

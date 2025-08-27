@@ -1,9 +1,8 @@
 ---
-
 - name: Ansible Playbook for configuring brand new Raspberry Pi
 
   hosts: pi-dash
   roles:
     - pi
-  remote_user: pi #Change {{ user_name }} after initial setup
-  become: yes
+  remote_user: pi # Change {{ user_name }} after initial setup
+  become: true
