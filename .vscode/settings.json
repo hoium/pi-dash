@@ -1,8 +1,9 @@
 {
-    "files.associations": {
-        "**/roles/*": "ansible",
-        "**/vars/*": "ansible",
-        "**/hosts": "ansible",
-        "**/*.yml": "ansible"
-    }
+  "files.associations": {
+    "**/roles/*": "ansible",
+    "**/vars/*": "ansible",
+    "**/hosts": "ansible",
+    "**/*.yml": "ansible"
+  },
+  "ansible.python.interpreterPath": "/opt/homebrew/bin/python3.11"
 }
