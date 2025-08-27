@@ -1,59 +1,66 @@
 ---
-
 - name: Ensure User is present
-  user:
+  ansible.builtin.user:
     name: "{{ user_name }}"
     groups: "{{ user_groups }}"
-    generate_ssh_key: yes
+    generate_ssh_key: true
     ssh_key_bits: 4096
     shell: "/bin/bash"
     state: present
-  register: new_user
+  register: pi_new_user
 
 - name: Upload SSH key
-  authorized_key:
+  ansible.builtin.authorized_key:
     user: "{{ user_name }}"
     key: "{{ lookup('file', '{{ ssh_pub_key }}') }}"
 
 - name: Enable passwordless sudo
-  lineinfile:
+  ansible.builtin.lineinfile:
     dest: /etc/sudoers
     state: present
     regexp: "^{{ user_name }}\t"
     line: "{{ user_name }}\tALL=(ALL:ALL) NOPASSWD:ALL"
-    validate: 'visudo -cf %s'
+    validate: "visudo -cf %s"
 
 - name: Set User password
-  shell: "usermod -p $(echo '{{ user_password }}' | openssl passwd -1 -stdin) {{ user_name }}"
-  when: new_user.changed
+  ansible.builtin.user:
+    name: "{{ user_name }}"
+    password: "{{ user_password | password_hash('sha512') }}"
+  when: pi_new_user.changed
 
 - name: Change Pi's password
-  shell: "usermod -p $(echo '{{ pi_password }}' | openssl passwd -1 -stdin) pi"
-  when: new_user.changed
+  ansible.builtin.user:
+    name: pi
+    password: "{{ pi_password | password_hash('sha512') }}"
+  when: pi_new_user.changed
 
 - name: Change ssh to new user password
-  set_fact:
-    ansible_password: "{{ pi_password }}"
-  when: new_user.changed
+  ansible.builtin.set_fact:
+    pi_ansible_password: "{{ pi_password }}"
+  when: pi_new_user.changed
 
 - name: Change Autologin to User
-  lineinfile: dest=/etc/lightdm/lightdm.conf
-              state=present
-              regexp="autologin-user=pi"
-              backrefs=yes
-              line="autologin-user={{ user_name }}"
-  become: True
-  when: new_user.changed
+  ansible.builtin.lineinfile:
+    dest: /etc/lightdm/lightdm.conf
+    state: present
+    regexp: "autologin-user=pi"
+    backrefs: true
+    line: "autologin-user={{ user_name }}"
+  become: true
+  when: pi_new_user.changed
 
-- name: restart server
-  shell: sleep 2 && shutdown -r now
+- name: Restart server
+  ansible.builtin.reboot:
+    msg: "Rebooting after user configuration"
+    connect_timeout: 5
+    pre_reboot_delay: 2
   async: 1
   poll: 0
-  become: yes
-  become_method: sudo
-  ignore_errors: true
+  become: true
+  become_method: ansible.builtin.sudo
+  failed_when: false
 
 - name: Wait for SSH to come up {{ host_ip }}
-  wait_for_connection:
+  ansible.builtin.wait_for_connection:
     delay: 60
     timeout: 300

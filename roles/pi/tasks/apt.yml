@@ -1,32 +1,28 @@
 ---
-
 - name: APT - Install packages
-  apt:
-    state: latest
+  ansible.builtin.apt:
+    state: present
     name: "{{ apt_install_packages }}"
   when: apt_install_packages
 
 - name: APT - Remove packages
-  apt:
+  ansible.builtin.apt:
     state: absent
     name: "{{ apt_remove_packages }}"
   when: apt_remove_packages
 
 - name: APT - Full system update
-  apt:
+  ansible.builtin.apt:
     upgrade: full
   tags:
     - full-update
 
 - name: Rebooting if needed...
-  command: shutdown -r now removes=/var/run/reboot-required
+  ansible.builtin.command:
+    cmd: shutdown -r now
+    removes: /var/run/reboot-required
   async: 0
-  poll: 0
-  ignore_errors: true
-  register: restarted
-  tags:
-    - full-update
 
 - name: Wait for SSH to come up {{ host_ip }}
-  wait_for_connection:
-      timeout: 300
+  ansible.builtin.wait_for_connection:
+    timeout: 300

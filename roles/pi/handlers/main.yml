@@ -1,7 +1,14 @@
 ---
+- name: Include vars of all.yml.
+  ansible.builtin.include_vars:
+    file: all.yml
 
-- name: update timezone
-  command: dpkg-reconfigure --frontend noninteractive tzdata
+- name: Include vars of secrets.yml.
+  ansible.builtin.include_vars:
+    file: secrets.yml
 
-- name: restart ssh
-  service: name=ssh state=restarted enabled=yes
+- include: config.yml
+- include: ssh.yml
+- include: apt.yml
+- include: user.yml
+- include: chromium.yml
